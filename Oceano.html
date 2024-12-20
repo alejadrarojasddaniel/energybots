@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENERGYBOTS</title>
+        <!-- Agregar enlace al CSS de Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+        /* Estilos generales */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #62cbe642; /* Fondo azul mar */
+        }
+
+        /* Carrusel de imágenes */
+        .carousel-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Controles del carrusel */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Nueva sección de información dinámica */
+        .info-blue-metrics {
+            background-color: #0f3963;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            border-top: 5px solid #fff;
+            margin-top: 20px;
+        }
+
+        .info-blue-metrics h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .info-blue-metrics p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-blue-metrics strong {
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .dynamic-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .show-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sección de los expertos biólogos */
+        .experts {
+            padding: 50px 20px;
+            background-color: #fff4f4;
+            text-align: center;
+            background-image: url('https://www.arquiprojeto.art.br/wp-content/uploads/2021/05/1_38_ggh7VMS88m1a2e4JjXQ-scaled.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+           /* Nueva sección de información dinámica */
+        .info-blue-metrics {
+            background-color: #0f3963;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            border-top: 5px solid #fff;
+            margin-top: 20px;
+        }
+
+        .info-blue-metrics h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .info-blue-metrics p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-blue-metrics strong {
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .dynamic-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .show-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+         /* Nueva sección de información dinámica */
+         .info-blue-metrics {
+            background-color: #0f3963;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            border-top: 5px solid #fff;
+            margin-top: 20px;
+        }
+
+        .info-blue-metrics h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .info-blue-metrics p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .info-blue-metrics strong {
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .dynamic-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .show-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+        }
+
+        .extra-info {
+            display: none;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #298acad0;
+            color: white;
+            border-radius: 5px;
+        }
+
+        /* Sección de imagen del equipo */
+        .team-image {
+            width: 100%;
+            height: auto;
+            margin-top: 30px;
+        }
+
+        .social-media {
+            padding: 20px;
+            background-color: #4095ce;
+            text-align: center;
+        }
+
+        .social-media a {
+            margin: 0 15px;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #222;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+/* Nueva sección de información progresiva y imágenes */
+.progressive-info {
+    padding: 40px 20px;
+    text-align: center;
+    color: white;
+    background-color: #2b4d75;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+.progressive-info h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.dynamic-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.show-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info-item {
+    margin-bottom: 40px;
+}
+
+.info-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Asegura que el ícono y el texto estén alineados correctamente */
+    gap: 20px;
+    text-align: left;
+    max-width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+    margin: 0 auto; /* Centra los elementos dentro del contenedor */
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.info-image {
+    width: 45%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+/* Estilo para el texto adicional progresivo */
+.progressive-text {
+    padding: 40px 20px;
+    text-align: center;
+    color: white;
+    background-color: #2b4d75;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+.progressive-text .dynamic-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.progressive-text .show-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Estilos para el contador de visitas */
+.visit-counter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+        
+
+    </style>
+</head>
+<body>
+
+    <!-- Carrusel de imágenes -->
+    <section class="carousel-container">
+        <div class="carousel">
+            <img src="https://images.unsplash.com/photo-1682687982502-1529b3b33f85?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VibWFyaW5pc21vfGVufDB8fDB8fHww" alt="Imagen 1">
+            <img src="https://m.media-amazon.com/images/I/71R-o2xEOEL.jpg" alt="Imagen 2">
+            <img src="https://wallpapers.com/images/hd/sea-coral-reef-tropical-fish-9e494hnnc4ej3cef.jpg" alt="Imagen 4">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnV6b3N8ZW58MHx8MHx8fDA%3D" alt="Imagen 3">
+            <img src="https://images.unsplash.com/photo-1682687982502-1529b3b33f85?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VibWFyaW5pc21vfGVufDB8fDB8fHww" alt="Imagen 4">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </section>
+
+    <!-- Nueva sección de información dinámica -->
+    <section class="info-blue-metrics">
+        <h2>ESTACIÓN METEOROLÓGICA</h2>
+        <p class="dynamic-text">¡Hola! Somos el equipo de robótica ENERGYBOTS y estamos súper emocionados de presentarles nuestro proyecto para el desafío de este año de la temporada 2024-2025 SUBMERGED: ¡La Estación Meteorológica BLUEMETRICS!</p>
+        <p class="dynamic-text">Nuestra idea nació después de investigar los problemas que existen en mares y océanos, y de una consulta con expertos biólogos marinos, pensamos en cómo podríamos ayudarlos después de compartir sus investigaciones y de cómo lo estaban haciendo.</p>
+        <p class="dynamic-text">Nos maravilló que tienen un trabajo increíble y muy importante: cuidar nuestros océanos y las especies que viven en ellos.</p>
+  
+        <!-- Contador de visitas -->
+    <div id="visit-counter" class="visit-counter">
+        Visitas: 0
+    </div>
+    </section>
+
+    <!-- Sección de los expertos biólogos -->
+    <section class="experts">
+        <h2>Conoce a nuestros expertos</h2>
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/a.jpg" alt="Experto 1">
+                <h3>IRVIN ALBERTO MARTÍNEZ CETIS</h3>
+                <button onclick="toggleInfo(1)">Ver más</button>
+                <div class="extra-info" id="info-1">
+                    <p>Biólogo marino, especialista en cefalópodos, ha navegado en buques oceanográficos en el Pacífico mexicano, buscando para larvas de calamares. Actualmente es profesor y trabaja en monitoreos biológicos arrecifales.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/b.jpg" alt="Experto 2">
+                <h3> LAURA ELENA MORALES COUTO</h3>
+                <button onclick="toggleInfo(2)">Ver más</button>
+                <div class="extra-info" id="info-2">
+                    <p>Ingeniera en alimentos especializada en sistemas de gestión de calidad, auditora de tercera parte en esquemas ISO; y dueña fundadora de la consultoría KIKAI C&T.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/c.jpg" alt="Experto 3">
+                <h3>CATALINA VELASCO CHARPENTIER</h3>
+                <button onclick="toggleInfo(3)">Ver más</button>
+                <div class="extra-info" id="info-3">
+                    <p>Bióloga marina de profesión y comunicadora científica por vocación. Es exploradora de National Geographic, cofundadora de la Fundación Mar y Ciencia.</p>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/d.jpg" alt="Experto 4">
+                <h3>YASMIN QUINTANA MORALES</h3>
+                <button onclick="toggleInfo(4)">Ver más</button>
+                <div class="extra-info" id="info-4">
+                    <p>Científica especializada en Ecología y Biología de la Conservación en ecosistemas acuáticos. Investigadora para la Estación Biológica de la Universidad de Florida Nature Coast.</p>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/f.jpg" alt="Experto 5">
+                <h3>YASMIN GONZÁLEZ REYES</h3>
+                <button onclick="toggleInfo(5)">Ver más</button>
+                <div class="extra-info" id="info-5">
+                    <p>Bióloga marina con maestría en Ciencias, buzo, actualmente se dedica al monitoreo biológico de arrecifes, lagunas costeras y manglares en la Península de Yucatán. </p>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="card">
+                <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/r.jpg" alt="Experto 6">
+                <h3>JUAN MANUEL BARNARD ÁVILA</h3>
+                <button onclick="toggleInfo(6)">Ver más</button>
+                <div class="extra-info" id="info-6">
+                    <p>Biólogo marino, buzo, fotógrafo submarino y productor de videos sobre biodiversidad. Cuenta con màs de 30 años como instructor de buceo y es Director y fundador de estación de radio AQUAMARINA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva sección de información progresiva -->
+    <section class="progressive-info">
+        
+        <p class="dynamic-text">Para lograrlo, necesitamos información precisa sobre el clima y las condiciones del agua. Aquí es donde entra nuestra estación meteorológica, diseñada especialmente para medir humedad, radiación UV, temperatura del agua y calidad del aire.</p>
+        
+        <!-- Información dinámica de cada factor -->
+        <div class="info-item dynamic-text">
+            <h3>Humedad</h3>
+            <div class="info-content">
+                <img src="https://img.icons8.com/ios/452/humidity.png" alt="Icono de humedad" class="info-icon">
+                <p>Nos ayuda a entender cómo interactúan el aire y el agua. Esto es clave para predecir fenómenos como tormentas tropicales o huracanes, que impactan tanto a la vida marina como a las comunidades cercanas.</p>
+            </div>
+        </div>
+    
+        <div class="info-item dynamic-text">
+            <h3>Radiación UV</h3>
+            <div class="info-content">
+                <img src="https://img.icons8.com/ios/452/sun.png" alt="Icono de radiación UV" class="info-icon">
+                <p>Los niveles altos pueden ser peligrosos para organismos marinos sensibles, como los corales. Con esta medición, los biólogos pueden identificar áreas en riesgo y tomar acciones preventivas.</p>
+            </div>
+        </div>
+    
+        <div class="info-item dynamic-text">
+            <h3>Temperatura del agua</h3>
+            <div class="info-content">
+                <img src="https://img.icons8.com/ios/452/temperature.png" alt="Icono de temperatura" class="info-icon">
+                <p>Es fundamental para monitorear la salud de los ecosistemas marinos. Si las temperaturas suben demasiado, podría haber migraciones inesperadas o incluso la muerte de especies clave.</p>
+            </div>
+        </div>
+    
+        <div class="info-item dynamic-text">
+            <h3>Calidad del aire</h3>
+            <div class="info-content">
+                <img src="https://img.icons8.com/ios/452/air-quality.png" alt="Icono de calidad del aire" class="info-icon">
+                <p>Esto afecta directamente al océano, ya que la contaminación atmosférica puede alterar el equilibrio químico del agua y perjudicar a los organismos que dependen de ella.</p>
+            </div>
+        </div>
+    
+        <!-- Sección de imágenes -->
+        <div class="image-container">
+            <img src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/8.jpeg" alt="Imagen del proyecto 1" class="info-image">
+            <img src=file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/9.jpeg alt="Imagen del proyecto 2" class="info-image">
+        </div>
+    </section>
+    <!-- Nuevo apartado con texto adicional -->
+<div class="progressive-text">
+    <p class="dynamic-text">Además, nuestra estación no solo sirve para ayudar a los biólogos, ¡también tiene un superpoder! 🌪 Puede apoyar en la predicción de huracanes. Al combinar las mediciones de humedad, temperatura y calidad del aire, es posible anticipar con mayor precisión las condiciones necesarias para que se forme un huracán, lo que podría salvar vidas.</p>
+    <p class="dynamic-text">Lo mejor de BlueMetrics es que es portátil, resistente al agua y funciona con poca energía, así que puede ser instalada en barcos, boyas o incluso en playas remotas.</p>
+    <p class="dynamic-text">Creemos que con esta innovación, estamos ayudando a construir un futuro más sostenible, tanto para los océanos como para las personas que dependen de ellos.</p>
+</div>
+
+    <!-- Sección de imagen del equipo -->
+    <section>
+        <img class="team-image" src="file:///C:/Users/Nicolas/Desktop/OceanoMares/imagenes/h.jpg" alt="Imagen del equipo">
+    </section>
+
+    <!-- Sección de redes sociales -->
+    <section class="social-media">
+        <h3>¡Síguenos en nuestras redes sociales!</h3>
+        <a href="https://instagram.com/energybotsfll" target="_blank">Instagram</a>
+        <a href="https://facebook.com/EnergyBots" target="_blank">Facebook</a>
+        <h4>¿Qué opinan? ¡Estamos listos para hacer olas en el mundo de la ciencia! </h4>
+        <h4> #GoTeam #InnovationWithImpact</h4>
+    </section>
+
+        <!-- Agregar enlace al CSS de Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script>
+        // Función para alternar la información extra de cada experto
+        function toggleInfo(expertId) {
+            const info = document.getElementById(`info-${expertId}`);
+            const isVisible = info.style.display === 'block';
+            info.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // Detecta cuando la sección es visible y revela el contenido
+        const dynamicTexts = document.querySelectorAll('.dynamic-text');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-text');
+                }
+            });
+        }, {
+            threshold: 0.2 // Se activa cuando el 20% del texto es visible
+        });
+        
+        dynamicTexts.forEach(text => observer.observe(text));
+        
+        // Funcionalidad del carrusel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const totalImages = images.length;
+        const carousel = document.querySelector('.carousel');
+
+        // Función para cambiar la imagen
+        function changeImage() {
+            if (currentIndex >= totalImages) {
+                currentIndex = 0;
+            }
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            currentIndex++;
+        }
+
+        // Cambiar la imagen cada 5 segundos
+        setInterval(changeImage, 5000);
+       // Función para actualizar el contador de visitas
+function updateVisitCounter() {
+    // Recuperar el contador de visitas del localStorage
+    let visitCount = localStorage.getItem('visitCount');
+    
+    // Si no existe, inicializamos el contador en 0
+    if (!visitCount) {
+        visitCount = 0;
+    }
+
+    // Incrementar el contador
+    visitCount++;
+
+    // Guardar el nuevo valor en el localStorage
+    localStorage.setItem('visitCount', visitCount);
+
+    // Mostrar el contador actualizado en el elemento del DOM
+    document.getElementById('visit-counter').textContent = `Visitas: ${visitCount}`;
+}
+
+// Llamar a la función para actualizar el contador cuando la página se carga
+updateVisitCounter();
+
+        // Funciones para los botones de navegación
+        document.querySelector('.prev').addEventListener('click', () => {
+            if (currentIndex === 0) {
+                currentIndex = totalImages - 1;
+            } else {
+                currentIndex--;
+            }
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+
+        document.querySelector('.next').addEventListener('click', () => {
+            if (currentIndex === totalImages - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        });
+
+    </script>
+
+</body>
+</html>
